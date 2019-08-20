@@ -1,0 +1,51 @@
+&Class 17:Shortest paths I
+
+1.Shortest path is an application using dynamic programming and greedy algorithm.
+
+2.What's a path in a graph?
+-In directed graph G,we know the edge weights which are given by function w,paths are the
+directed edges in the diagraph.
+-Some of the weights can be negative,some can be zero.
+
+3.Shortest path from u to v ?
+-it's a path of minimum weight from u to v.
+-we call the weight of the shortest path delta.
+
+4.When do shortest path do not exist?
+-the weights of a circle in the graph is negative.
+-delta equals to infinity when no shortest paths exist.
+
+5.the key of dynamic programming:Optimal substructure
+A subpath of a shortest path is a shortest path.
+Proof:Cut & Paste.
+
+6.Trangle inequality:
+-for all vertices u,v,x in the V.
+delta(u,v) <= delta(u,x)+delta(x,v)
+Proof:by picture.
+
+7.Single-source shortest paths problem
+from given source vertex s in V,find shortest-pathweights delta for all vertexes in V.
+-Assume all the weights are not exist --> shortest paths exist -->delta >= 0.
+
+8.Idea:greedy algorithm
+-greedy choice,each step,we look at all the all the vertices we haven't yet added to S
+take the one whose weight is minimum into S
+-the core of this is updating the weights
+
+9.Dijkstra algorithm:
+d[s] <- 0(d is an array indexed by vertices)(d[x] means the distance estimate for x)
+(d[x] = delta(x,v))
+for each v in V
+  do d[v] <- infinity
+S <- None
+Q <- V
+(this is initialization)
+while Q doesn't equals to None
+  do u<-extractmin in Q
+  S<-S U {u}
+  for each v in Adj{u}
+    do if d[v] > d[u] + w(u,v)
+      then d[v] <- d[u] + w(u,v)
+(this is the core step:relaxation step)
+  
