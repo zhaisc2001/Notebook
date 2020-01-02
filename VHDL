@@ -1,0 +1,29 @@
+1.无阻塞赋值符号为<=，阻塞赋值符号为=；
+当设计组合逻辑电路时使用=，当设计时序逻辑电路时使用<=;
+2.module module-name(port-name,port-name,...,port-name)
+  ...
+  endmodule
+上面为一个程序的基本格式
+3.input/output [MSB:LSB] identifier
+声明输入输出变量的基本格式
+声明中的连线使用wire表示
+4.基本逻辑表示符号：&-->与;|-->或；^-->异或;~非；
+5.声明时序逻辑或组合逻辑输出变量时，我们使用reg声明变量类型；
+6.当声明某个变量为常数时，使用parameter identifier = value;
+7.value表达为n'bdd...d时，n代表该值有多少位，b代表进制，d是数字；
+8.8'b11010011<<3意思是将该数左移三位，结果为8'b10011000;
+9.X?Y:Z意思是当X=1时取Y，否则取B；
+10.在条件判断语句中，与或非的符号变为&&、||、！；
+11.begin-end的标准格式为
+begin:block-name;
+  decalrations(variable,parameter)
+  statement
+  ...
+end
+12.case-default的格式为
+case (变量)
+  case1:
+  case2:
+  ...
+  default:
+endcase
