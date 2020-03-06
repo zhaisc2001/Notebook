@@ -1,0 +1,29 @@
+一.资金的时间价值和跨时间优化
+1.资金的时间价值(Time value of money)：利率；通货膨胀；不确定性；
+-这笔资金现在消费的效用大于将来的效用；
+-推迟消费的无风险补偿（Riskless Compensation for delaying consumption:利率正是将来消费与现在消费的边际替代率；
+-概念：现值，终值；单利(simple interest)，复利(compound interest)；
+-FV = PV*(1+i)^n，
+
+二.复利、计息频率与有效年利率
+1.自动转存/滚存（Annual Automatic Rollover)复利;5年定期存款（5-year fixed/time deposit）单利;
+2.挂牌年利率(Annual percentage rate,APR)一年只计息一次，不考虑利息；有效年利率(Effective Annual Rate,EFF)，考虑利息；
+3.将月转化为年，EFF(APR,m)=(1+APR/m)^m - 1;当m趋向无穷时，EFF=e^APR-1;
+
+三.现值、终值、利率、期限等
+-PV = FV/(1+i)^n;这个过程叫做折现；折现现金流分析（Discounted Cash Flow Analysis），把将来的资金以及资金的
+价值，通过折现的方式让现在体现且反应出来；
+-此时利率叫做折现率；
+
+四.年金与分期摊还
+-多笔现金流的情形；多次存入；
+-年金(PV of Annuities)：等时间间隔，等金额的一系列现金流,PV = PMT*(1-(1+i)^-n)/i;
+-普通年金（后付年金，Ordinary Annuity）,即付年金，在每期期初而形成的年金(Immediate Annuity);
+-永续年金（Perpetual Annuity），PV = PMT/i;
+-分期摊还(Amortization);按揭贷款的分期摊还(Amortization of Mortgages):等额本息，等额本金；
+
+五.个人生命周期财务分析
+-出生-工作-退休-死亡；
+-目标替代率（Target replacement rate）：退休后开支等于工作时工资多少;还要计算出工作时消费；
+-保持与工作时一致的相同水平；
+-年金终值系数；
