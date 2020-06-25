@@ -1,0 +1,113 @@
+1.1:略
+
+1.2:略
+
+1.3:
+#include <iostream>
+using namespace std;
+
+int main() {
+	cout<<"Hello,world"<<endl;
+	return 0;
+}
+
+1.4:
+#include <iostream>
+using namespace std;
+
+int main() {
+	int a = 114,b = 514;
+	cout<<a*b<<endl;
+	return 0;
+}
+
+1.5:
+原程序：
+#include <iostream>
+using namespace std;
+
+int main() {
+	cout<<"This is a very very very long sentence."<<endl;
+	return 0;
+}
+更改后：
+#include <iostream>
+using namespace std;
+
+int main() {
+	cout<<"This ";
+	cout<<"is "; 
+	cout<<"a "; 
+	cout<<"very "; 
+	cout<<"very "; 
+	cout<<"very "; 
+	cout<<"long "; 
+	cout<<"sentence."<<endl;
+	return 0;
+}
+
+1.6:程序不合法，在输出运算符<<的左边应该有std::cout;
+
+1.7:
+code as follow:
+#include <iostream>
+using namespace std;
+/*
+* 注释对/* */不能嵌套。
+* “不能嵌套”几个字会被认为是源码，
+* 像剩余程序一样处理
+*/
+int main() {
+
+	return 0;
+}
+
+报错信息如下：
+prog.cpp:4:17: error: stray ‘\344’ in program
+ * 注释对/* */不能嵌套。
+                 ^
+1.8:第一行、第二行和第四行代码合法
+
+1.9:
+#include <iostream>
+using namespace std;
+
+int main() {
+	int sum = 0,a = 50;
+	while(a <= 100)
+	{
+		sum += a;
+		++a;
+	}
+	cout<<sum<<endl;
+}
+
+1.10:
+#include <iostream>
+using namespace std;
+
+int main() {
+	int a = 10;
+	--a;
+	while(a > 0)
+	{
+		cout<<a<<endl;
+		--a;
+	}
+}
+
+1.11：
+#include <iostream>
+using namespace std;
+
+int main() {
+	cout<<"Enter two nubers:"<<endl;
+	int a = 10,b = 28;
+	cin>>a>>b;//假设b为大于a的整数
+	while(b >= a)
+	{
+		cout<<b<<endl;
+		--b;
+	}
+}
+
