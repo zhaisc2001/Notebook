@@ -111,3 +111,25 @@ int main() {
 	}
 }
 
+1.12:完成了从-100加到100的功能
+
+1.13：略
+
+1.14:for循环方便控制，同时会生成一个局部变量；
+while循环在需要做无限循环的时候较为方便；
+
+1.15：略
+
+1.16:
+#include <iostream>
+using namespace std;
+
+int main() {
+	int value,sum = 0;
+	while(cin>>value)
+	{
+		sum += value;
+	}
+	cout<<sum<<endl;
+	return 0;
+}
