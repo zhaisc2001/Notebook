@@ -133,3 +133,65 @@ int main() {
 	cout<<sum<<endl;
 	return 0;
 }
+
+1.17:会将输入的数个数输出；每个输入都只出现一次；
+
+1.18:略
+
+1.19：
+#include <iostream>
+using namespace std;
+
+int main() {
+	cout<<"Enter two nubers:"<<endl;
+	int a,b;
+	cin>>a>>b;
+	if(b>=a)
+	{
+		while(b >= a)
+		{
+			cout<<b<<endl;
+			--b;
+		}
+	}
+	else
+	{
+	while(a >= b)
+		{
+			cout<<a<<endl;
+			--a;
+		}
+	}
+	return 0;
+}
+
+1.20:略
+
+1.21:
+#include<iostream>
+#include"Sales_item.h"
+using namespace std;
+
+int main(){
+	Sales_item item1,item2;
+	cin>>item1>>item2;
+	cout<<item1+item2<<endl;;
+	return 0;
+}
+
+1.22:
+#include<iostream>
+#include"Sales_item.h"
+using namespace std;
+
+int main(){
+	Sales_item sum,value;
+	while(cin>>value)
+	{
+	sum += value;
+	}
+	cout<<sum<<endl;;
+	return 0;
+}
+
+1.25: 略
