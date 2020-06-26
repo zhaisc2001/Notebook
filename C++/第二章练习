@@ -1,0 +1,30 @@
+2.1:
+int，short只占据16位内存，long占据32位内存空间，long long占据64位内存空间；
+int至少和short一样大，long至少和int一样大，long long至少和long一样大；
+
+无符号类型无法表示负数，而带符号类型可以；
+
+float为精度较低的单精度浮点数，double为精度较高的双精度浮点数；
+
+2.2:
+对于这三种数据我认为都应该使用double类型，因为float可能导致精度不够，而long double会导致运算成本过高；
+
+2.3:
+32
+4294967264
+32
+-32
+0
+0
+
+2.4：略
+注意第二项是因为unsigned无法表示负数，直接转到unsigned最大值-32了；
+
+2.5:
+(a)依次为char,wchar_t,string,wchar_t
+(b)int,unsigned int,long,unsigned long,八进制，十六进制
+(c)double,float,long double
+(d)int,unsigned,double,double
+
+2.6
+
