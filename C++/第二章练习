@@ -174,3 +174,44 @@ p1 = p2;非法，const int*无法转换成int*类型
 p2 = p1;合法，int*类型可以转换成const int*类型
 p1 = p3;非法，const int*无法转换成int*类型
 p2 = p3;合法
+
+2.32:
+非法,应该为：
+int null = 0,*p = &null;
+
+2.33:
+a,b,c合法，d非法，e非法，g非法
+
+2.34:
+略
+
+2.35：
+j:int;k:const int&;p:const int*;j2:const int;k2:const int&
+验证程序如下：
+#include <iostream>
+#include<typeinfo>
+using namespace std;
+
+int main ()
+{
+    const int i = 42;
+    auto j = i;const auto &k = i;auto *p = &i;
+    const auto j2 = i,&k2 = i;
+    j = 32;//编译通过
+    // k = j;//编译不通过 
+    p = &j;//编译通过
+    // j2 = 32;//编译不通过 
+    cout<<bool(typeid(j2).name()==typeid(k2).name())<<endl;//两变量类型相同 ，输出 1
+    return 0;
+}
+
+2.36:
+
+
+
+
+
+
+
+
+
