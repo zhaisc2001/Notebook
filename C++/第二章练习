@@ -206,7 +206,27 @@ int main ()
 }
 
 2.36:
+a:int,b:int,c:int,d:int&
+a:4,b:4,c:4,d:4;
 
+2.37:
+a:int,b:int,c:int,d:int&
+
+2.38:
+在使用auto指定类型时，对象会被初始化为被auto推断的对象，而decltype不会；
+int i = 0;
+auto a = i;
+decltype(i) b = 17;
+a与b指定的类型一样
+
+int i = 0;
+auto a = i;
+decltype((i)) b = i;
+a与b指定的类型不一样
+
+2.39:
+error: expected ';' after struct definition
+类的后面要加上分号；
 
 
 
