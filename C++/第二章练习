@@ -228,8 +228,109 @@ a与b指定的类型不一样
 error: expected ';' after struct definition
 类的后面要加上分号；
 
+2.40:
+#include<iostream>
+using namespace std;
+int main()
+{
+    struct Sales_data{
+        string booknum;
+        unsigned units_sold = 0;
+        double revenue = 0.0;
+    };
+}
 
+2.41:
+1.20:#include<iostream>
+using namespace std;
+int main()
+{
+    struct Sales_data{
+        string booknum;
+        unsigned units_sold = 0;
+        double revenue = 0.0;
+    };
+    while(cin>>Sales_data.booknum>>Sales_data.units_sold>>Sales_data.revenue)
+    {
+        cout<<Sales_data.booknum<<" "<<Sales_data.units_sold<<""<<Sales_data.revenue;
+    }
+    
+}
+1.21:
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+    struct Sales_data{
+        string booknum;
+        unsigned units_sold = 0;
+        double revenue = 0.0;
+    };
+   
+    Sales_data sales_data1,sales_data2;
+    cin>>sales_data1.booknum>>sales_data1.units_sold>>sales_data1.revenue;
+    cin>>sales_data2.booknum>>sales_data2.units_sold>>sales_data2.revenue;
+    
+    if(sales_data1.booknum == sales_data2.booknum){
+        cout<<sales_data1.revenue+sales_data2.revenue<<endl;
+    }
+    else{
+        coutj<<"The ISBN of two books are different."<<endl;
+    }
+}
+1.22:
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+    string a;
+    struct Sales_data{
+        string booknum;
+        unsigned units_sold = 0;
+        double revenue = 0.0;
+    };
+    Sales_data sales_data;
+    double sum = 0.0;
+    while(cin>>sales_data.booknum>>sales_data.units_sold>>sales_data.revenue){
+    sum += sales_data.revenue;
+    }
+    cout<<sum<<endl;
+}
 
+1.23:
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+    string a;
+    struct Sales_data{
+        string booknum;
+        unsigned units_sold = 0;
+        double revenue = 0.0;
+    };
+    Sales_data sales_data;
+    string current_booknum;
+    int times = 1;
+    if(cin>>sales_data.booknum){
+        current_booknum = sales_data.booknum;
+    while(cin>>sales_data.booknum){
+        if(current_booknum == sales_data.booknum){
+            times += 1;
+            }
+        else{
+            cout<<current_booknum<<" occurs "<<times<<" times."<<endl;
+            times = 1;
+            current_booknum =  sales_data.booknum;
+            }
+    }
+    cout<<current_booknum<<" occurs "<<times<<" times."<<endl;
+}
+}
+
+1.24、1.25:略
 
 
 
