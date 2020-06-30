@@ -1,1 +1,148 @@
+3.1:略
 
+3.2:#include <iostream>
+#include <string>
+using namespace std;
+
+int main ()
+{
+  string a;
+  while(getline(cin,a))
+  {
+      cout<<a<<endl;
+  }
+}
+修改：
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main ()
+{
+  string a;
+  while(cin>>a)
+  {
+      cout<<a<<endl;
+  }
+}
+
+3.3:string输入运算符将开头空白忽略，结尾空白作为终止信号；
+getline函数将空白写入字符串，换行符号作为终止信号；
+
+3.4:
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main ()
+{
+  string a,b;
+  cin>>a>>b;
+  if(a>b)
+  {
+    cout<<a<<endl;    
+  }
+  else if(b>a)
+  {
+    cout<<b<<endl;
+  }
+  else
+  {
+    cout<<"Two strings are equal."<<endl;
+  }
+} 
+修改后：
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main ()
+{
+  string a,b;
+  cin>>a>>b;
+  if(a.size()>b.size())
+  {
+    cout<<a<<endl;    
+  }
+  else if(b.size()>a.size())
+  {
+    cout<<b<<endl;
+  }
+  else
+  {
+    cout<<"string a is as long as string b."<<endl;
+  }
+} 
+
+3.5:
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main ()
+{
+  string a,s;
+  while(cin>>a)
+  {
+    s+=a;
+  }
+  cout<<s<<endl;
+} 
+修改后：
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main ()
+{
+  string a,s;
+  while(cin>>a)
+  {
+    s+=a;
+    s+=" ";
+  }
+  cout<<s<<endl;
+} 
+
+3.6:#include <iostream>
+#include <string>
+using namespace std;
+
+int main ()
+{
+  string a;
+  a = "hello";
+  for (auto &i : a)
+  {
+    i = 'X';
+  }
+  cout<<a<<endl;
+} 
+
+3.7:无法改变字符串；
+
+3.8:
+范围for语句最为方便，不用添加局部变量；
+
+3.9：合法，但是输出为空
+
+3.10：
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main ()
+{
+  string a;
+  getline(cin,a);
+  for(auto &i : a)
+  {
+      if(ispunct(i))
+      {
+      i = ' ';
+      }
+  }
+  cout<<a<<endl;
+} 
+
+3.11:合法，c的类型是const char&;
