@@ -146,3 +146,103 @@ int main ()
 } 
 
 3.11:合法，c的类型是const char&;
+
+3.12:(a)正确；
+(b)不正确，svec中装载的对象是string类型，而ivec作为vector它的对象是vector<int>类型；
+(c)正确；
+
+3.13:
+(a)0
+(b)10个元素，值都是0；
+(c)10个元素，值都是42；
+(d)1个元素，值是10；
+(e)2个元素，值是10和42；
+(f)1个元素，值是"10"；
+(g)10个元素，值是"hi";
+
+3.14:
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+int main()
+{
+  vector<int> numbers;
+  int number;
+  while(cin>>number)
+  {
+    numbers.push_back(number);
+  }
+}
+
+3.15:
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+int main()
+{
+  vector<string> strs;
+  string str;
+  while(cin>>str)
+  {
+    strs.push_back(str);
+  }
+}
+
+3.16:
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+int main()
+{
+  vector<int> v1;
+  vector<int> v2(10);
+  vector<int> v3(10,42);
+  vector<int> v4{10};
+  vector<int> v5{10,42};
+  vector<string> v6{10};
+  vector<string> v7{10,"hi"};
+  for (auto i : v5)
+  {
+    cout<<i<<endl;
+  }
+}
+
+3.17:
+// Example program
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+int main()
+{
+  vector<string> strs;
+  string str;
+  while(cin>>str)
+  {
+    strs.push_back(str);
+  }
+  for (auto &i : strs)
+  {
+    for (auto &j : i)
+    {
+        j = toupper(j);      
+    }
+    cout<<i<<endl;
+  }
+}
+
+3.18:
+修改为：
+vector<int> ivec;
+ivec.push_back(42);
+
+3.19:
+vector<int> ivec(10,42);
+
