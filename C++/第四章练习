@@ -24,3 +24,37 @@ int main(){
     int a = 4,b = 3,c = 2,d = 1;
     cout<<bool((a>b)*(b>c)*(c>d))<<endl;
 }
+
+4.21:
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+int main(){
+    vector<int> a{2,3,4,5,6};
+    for(auto i = a.begin();i != a.end();i++)
+    {
+        *i = ((*i)%2 != 0)?(*i)*2:*i;
+    }
+    for(auto i:a)
+    {
+        cout<<i<<endl;
+    }
+    return 0;
+}
+
+4.22:
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+int main(){
+    int grade = 76;
+    string final_grade;
+    final_grade = (grade >= 90) ? "high pass" : (grade >= 75) ? "pass" : (grade >= 60) ? "low pass" : "fail";
+    cout<<final_grade<<endl;
+    return 0;
+}
+
