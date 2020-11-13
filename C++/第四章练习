@@ -1,0 +1,26 @@
+4.10:
+#include<iostream>
+#include<vector>
+#include<cstring>
+
+using namespace std;
+
+int main(){
+    int a;
+    while (cin>>a) {
+        if(a == 42){break;}
+        else{cout<<a<<endl;}
+    }
+}
+
+4.11:
+#include<iostream>
+#include<vector>
+#include<cstring>
+
+using namespace std;
+
+int main(){
+    int a = 4,b = 3,c = 2,d = 1;
+    cout<<bool((a>b)*(b>c)*(c>d))<<endl;
+}
