@@ -55,3 +55,121 @@ int main(){
     cout<<abs(j)<<endl;
     return 0;
 }
+
+6.7:
+#include<iostream>
+
+using namespace std;
+
+int count(){
+    static int cnt = -1;
+    ++cnt;
+    return cnt;
+    
+}
+int main(){
+    int i = 0,counts = 0;
+    while (i < 10)
+    {
+        counts = count();
+        cout<<counts<<endl;
+        ++i;
+    }
+}
+
+6.10:
+#include<iostream>
+
+using namespace std;
+
+void swop(int *i,int *j){
+    int t = 0;
+    t = *j;
+    *j = *i;
+    *i = t;
+}
+int main(){
+    int a = 1;
+    int b = 2;
+    swop(&a, &b);
+    cout<<a<<endl;
+    cout<<b<<endl;
+}
+
+6.11:
+#include<iostream>
+
+using namespace std;
+
+void reset(int &i){
+    i = 0;
+}
+
+int main(){
+    int a = 1;
+    int b = 2;
+    reset(a);
+    reset(b);
+    cout<<a<<endl;
+    cout<<b<<endl;
+}
+
+6.12:
+#include<iostream>
+
+using namespace std;
+
+void swop(int &i, int &j){
+    int t = 0;
+    t = j;
+    j = i;
+    i = t;
+}
+
+int main(){
+    int a = 1;
+    int b = 2;
+    swop(a,b);
+    cout<<a<<endl;
+    cout<<b<<endl;
+}
+
+6.17:
+#include<iostream>
+
+using namespace std;
+
+bool is_upper(const string s){
+    bool a = false;
+    auto i = begin(s);
+    while(a != true && i != end(s))
+    {
+        a = isupper(*i);
+        ++i;
+    }
+    return a;
+}
+
+int main(){
+    string a;
+    cin>>a;
+    cout<<is_upper(a)<<endl;
+}
+
+#include<iostream>
+
+using namespace std;
+
+string to_lower(string &s){
+    for (auto i = begin(s);i != end(s);i++)
+    {
+        *i = tolower(*i);
+    }
+    return s;
+}
+
+int main(){
+    string a;
+    cin>>a;
+    cout<<to_lower(a)<<endl;
+}
