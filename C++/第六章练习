@@ -173,3 +173,62 @@ int main(){
     cin>>a;
     cout<<to_lower(a)<<endl;
 }
+
+6.22:
+#include<iostream>
+
+using namespace std;
+
+void swop(int &a,int &b){
+    auto c = b;
+    b = a;
+    a = c;
+}
+
+int main(){
+    int a = 5;
+    int b = 7;
+    int *c = &a;
+    int *d = &b;
+    swop(*c,*d);
+    cout<<*c<<endl;
+    cout<<*d<<endl;
+}
+
+6.27:
+#include<iostream>
+
+using namespace std;
+
+int sum(initializer_list<int> lst){
+    int s = 0;
+    for(auto i = lst.begin();i != lst.end();++i)
+    {
+        s += *i;
+    }
+    return s;
+}
+
+int main(){
+    initializer_list<int> a{1,2,3,4,5,6,7,8,9};
+    cout<<sum(a)<<endl;
+}
+
+6.33:
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+void vector_out(vector<int>::iterator beg,vector<int>::iterator v_end){
+    if (beg != v_end)
+    {
+        cout<<*beg<<endl;
+        return vector_out(++beg, v_end);
+    }
+}
+
+int main(){
+    vector<int> a{1,2,3,4,5,6,7,8,9};
+    vector_out(a.begin(),a.end());
+}
