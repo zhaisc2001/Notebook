@@ -232,3 +232,47 @@ int main(){
     vector<int> a{1,2,3,4,5,6,7,8,9};
     vector_out(a.begin(),a.end());
 }
+
+6.36:
+#include<iostream>
+
+using namespace std;
+
+string (*arr_out(string i[10]))[10];
+
+int main(){
+    return 0;
+}
+
+6.37:
+#include<iostream>
+
+using namespace std;
+typedef string str_arr[10];
+
+str_arr *arr_out(string i[10]);
+
+int main(){
+    return 0;
+}
+
+#include<iostream>
+
+using namespace std;
+
+auto arr_out(string i[10]) -> string(*)[10];
+
+int main(){
+    return 0;
+}
+
+#include<iostream>
+
+using namespace std;
+string i[10];
+
+decltype(i) *arr_out(string i[10]);
+
+int main(){
+    return 0;
+}
