@@ -276,3 +276,118 @@ decltype(i) *arr_out(string i[10]);
 int main(){
     return 0;
 }
+
+6.42:
+#include<iostream>
+
+using namespace std;
+
+string make_plural(size_t ctr,const string &a,const string &b = "s")
+{
+    return (ctr > 1) ? a+b : a;
+}
+
+int main(){
+    cout<<make_plural(2, "success","es")<<endl;
+    cout<<make_plural(2,"failure")<<endl;
+    return 0;
+}
+
+6.44:
+#include<iostream>
+
+using namespace std;
+
+inline bool isShorter(const string &a,const string &b)
+{
+    return a.size()<b.size();
+}
+
+int main(){
+    string s1 = "sadfsdf";
+    string s2 = "sdjj";
+    cout<<isShorter(s1, s2)<<endl;
+    return 0;
+}
+
+6.47:
+#include<iostream>
+#include<vector>
+#include<cassert>
+
+using namespace std;
+
+void vector_out(vector<int>::iterator bgn,vector<int>::iterator v_end)
+{
+#ifndef NDEBUG
+    cerr<<v_end - bgn<<" "<<__func__<<" "<<__LINE__<<" "<<__TIME__<<" "<<__DATE__<<endl;
+#endif
+    while(bgn!=v_end){
+        cout<<*bgn<<endl;
+        ++bgn;
+    }
+}
+
+int main(){
+    vector<int> i {1,2,3,4,5,6,7,8};
+    vector_out(i.begin(), i.end());
+    return 0;
+}
+
+6.54:
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+int (*func)(int a,int b);
+
+int main(){
+    vector<int(*)(int,int)> i{func};
+    return 0;
+}
+
+6.55:
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+int (*func)(int a,int b);
+
+int pls(int a,int b){return a+b;}
+
+int mins(int a,int b){return a-b;}
+
+int multiply(int a,int b){return a*b;}
+
+int divide(int a,int b){return a/b;}
+
+int main(){
+    vector<int(*)(int,int)> i{(*pls),(*mins),(*multiply),(*divide)};
+    return 0;
+}
+
+6.56:
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+int pls(int a,int b){return a+b;}
+
+int mins(int a,int b){return a-b;}
+
+int multiply(int a,int b){return a*b;}
+
+int divide(int a,int b){return a/b;}
+
+int main(){
+    int a = 8,b = 4;
+    vector<int(*)(int,int)> i{(*pls),(*mins),(*multiply),(*divide)};
+    for(auto j:i)
+    {
+        cout<<j(a,b)<<endl;
+    }
+    return 0;
+}
