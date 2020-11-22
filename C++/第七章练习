@@ -161,3 +161,78 @@ int main(){
     return 0;
 }
 
+7.21:
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+class Sales_data;
+istream &read(istream&a,Sales_data &b);
+
+class Sales_data{
+    friend istream &read(istream&,Sales_data&);
+public:
+    string isbn() const {return bookNO;}
+    Sales_data& combine(const Sales_data&);
+    Sales_data() = default;
+    Sales_data(istream &r){read(r, *this);};
+    Sales_data(const string &s) : bookNO(s) {}
+    Sales_data(const string &s,unsigned u,double r):
+    bookNO(s),units_sold(u),revenue(u*r){}
+private:
+    string bookNO;
+    unsigned units_sold;
+    double revenue;
+};
+istream &read(istream &a,Sales_data &b)
+{
+    a>>b.bookNO>>b.units_sold>>b.revenue;
+    return a;
+}
+Sales_data& Sales_data::combine(const Sales_data &a){
+    units_sold += a.units_sold;
+    revenue += a.revenue;
+    return *this;
+}
+
+int main(){
+    Sales_data a;
+    Sales_data b("Code Craft");
+    Sales_data c("1984",22,57.96);
+    Sales_data d(cin);
+    return 0;
+}
+
+
+7.22:
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+class Person;
+istream &read(istream&a,Person &b);
+
+class Person{
+    friend istream &read(istream&,Person&);
+public:
+    Person() = default;
+    Person(const string &n):name(n){}
+    Person(const string &n,const string &a):name(n),address(a){}
+    Person(istream &r){read(r,*this);}
+    string out_name() const{return name;}
+    string out_address() const{return address;}
+private:
+    string name;
+    string address;
+};
+
+istream &read(istream&a,Person &b){
+    a>>b.name>>b.address;
+    return a;
+}
+
+int main(){
+    return 0;
+}
