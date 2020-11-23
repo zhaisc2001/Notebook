@@ -10,7 +10,6 @@ istream& test(istream &a){
     return a;
 }
 
-
 int main(){
     return 0;
 }
@@ -32,4 +31,265 @@ istream& test(istream &a){
 int main(){
     test(cin);
     return 0;
+}
+
+8.4:
+#include<iostream>
+#include<fstream>
+#include<string>
+#include<vector>
+
+using namespace std;
+
+void read_file(ifstream &a,vector<string> &t){
+    if(a){string s;while(getline(a,s)) {t.push_back(s);}}
+}
+
+
+int main(){
+    vector<string> text;
+    string path = "/Users/violet/Downloads/threekingdoms.txt";
+    ifstream f(path);
+    read_file(f, text);
+    f.close();
+    for(auto &i:text){cout<<i<<endl;}
+    return 0;
+}
+
+8.5:
+#include<iostream>
+#include<fstream>
+#include<string>
+#include<vector>
+
+using namespace std;
+
+void read_file(ifstream &a,vector<string> &t){
+    if(a){string s;while(a>>s) {t.push_back(s);}}
+}
+
+
+int main(){
+    vector<string> text;
+    string path = "/Users/violet/Downloads/threekingdoms.txt";
+    ifstream f(path);
+    read_file(f, text);
+    f.close();
+    auto i = text.begin();
+    cout<<*i<<endl;
+    return 0;
+}
+
+8.7:
+#include <iostream>
+#include <string>
+#include <fstream>
+
+using namespace std;
+
+class Sales_data {
+public:
+	Sales_data() {}
+	Sales_data(std::string bN, unsigned sold, double reven) :bookNo(bN), units_sold(sold), revenue(reven) {}
+	std::string isbn() const { return this->bookNo; }
+	Sales_data& combine(const Sales_data &rhs) {
+		units_sold += rhs.units_sold;
+		revenue += rhs.revenue;
+		return *this;
+	}
+	double avg_price() const {
+		if (units_sold) {
+			return revenue / units_sold;
+		}
+		else return 0;
+	}
+	Sales_data add(const Sales_data &lhs, const Sales_data &rhs) {
+		Sales_data sum = lhs;
+		sum.combine(rhs);
+		return sum;
+	}
+public:
+	std::string bookNo; //书号
+	unsigned units_sold;
+	double revenue;
+};
+
+istream &read(istream &is, Sales_data &item) {
+	double price = 0;
+	is >> item.bookNo >> item.units_sold >> price;
+	item.revenue = item.units_sold * price;
+	return is;
+}
+
+ostream &print(ostream &os, const Sales_data &item) {
+	os << item.isbn() << " " << item.units_sold << " " << item.revenue << " " << item.avg_price()<<"\n";
+	return os;
+}
+
+
+int main(int argc, char **argv)
+{
+	ifstream input(argv[1]);
+	ofstream output(argv[2]);
+
+	Sales_data total;
+
+	if (read(input, total))
+	{
+		Sales_data trans;
+
+		while (read(input, trans))
+		{
+			if (total.isbn() == trans.isbn())
+			{
+				total.combine(trans);
+			}
+			else
+			{
+				print(output, total);
+				cout << endl;
+				total = trans;
+			}
+		}
+		print(output, total);
+		cout << endl;
+		return 0;
+	}
+	else
+	{
+		cerr << "No data?!" << std::endl;
+		return -1;  // indicate failure
+	}
+}
+
+8.9:
+#include<iostream>
+#include<fstream>
+#include<vector>
+#include<string>
+#include<sstream>
+
+using namespace std;
+
+istream& test(istream &a){
+    string s;
+    while(a>>s){cout<<s<<endl;}
+    a.clear();
+    return a;
+}
+
+
+int main(){
+    string s;
+    cin>>s;
+    istringstream is(s);
+    test(is);
+    return 0;
+}
+
+8.10：
+#include<iostream>
+#include<fstream>
+#include<string>
+#include<vector>
+#include<sstream>
+
+using namespace std;
+
+void read_file(ifstream &a,vector<string> &t){
+    if(a){string s;while(getline(a,s)) {t.push_back(s);}}
+}
+
+
+int main(){
+    vector<string> text;
+    string path = "/Users/violet/Downloads/threekingdoms.txt";
+    ifstream f(path);
+    read_file(f, text);
+    f.close();
+    for(auto &i:text){istringstream record(i);
+        string word;
+        while(record>>word){cout<<word<<endl;}}
+    return 0;
+}
+
+8.11:
+#include<iostream>
+#include<fstream>
+#include<string>
+#include<vector>
+#include<sstream>
+
+using namespace std;
+
+struct PersonInfo{
+    string name;
+    vector<string> phones;
+};
+
+int main(){
+    string line,word;
+    vector<PersonInfo> people;
+    istringstream record;
+    while(getline(cin,line)){
+        PersonInfo info;
+        record.str(line);
+        record>>info.name;
+        while(record>>word){
+            info.phones.push_back(word);
+        }
+        people.push_back(info);
+    }
+    return 0;
+}
+
+8.13:
+#include<iostream>
+#include<sstream>
+#include<fstream>
+#include<vector>
+#include<string>
+
+using namespace std;
+
+struct PersonInfo {
+	string name;
+	vector<string> phones;
+};
+
+int main() {
+	cout << "Please input the fileName:" << endl;
+	string infile;
+	cin >> infile;
+	ifstream in(infile);
+	
+	if (!in) {
+		cerr << "can not open the file: " << infile << endl;
+		return 0;
+	}
+
+	string line, word;
+	vector<PersonInfo> people;
+	istringstream record;
+
+	while (getline(in, line)) {
+		record.str(line);
+		PersonInfo info;
+		record >> info.name;
+		while (record >> word) {
+			info.phones.push_back(word);
+		}
+		record.clear();
+		people.push_back(info);
+	}
+
+	for (const auto &entry : people) {
+		cout << entry.name << " ";
+		for (const auto &ph : entry.phones) {
+			cout << ph << " ";
+		}
+		cout << endl;
+	}
+	system("pause");
+	return 0;
 }
