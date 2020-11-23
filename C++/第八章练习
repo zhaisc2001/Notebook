@@ -1,0 +1,35 @@
+8.1:
+#include<iostream>
+
+using namespace std;
+
+istream& test(istream &a){
+    string s;
+    while(a>>s){cout<<s<<endl;}
+    a.clear();
+    return a;
+}
+
+
+int main(){
+    return 0;
+}
+
+8.2:
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+istream& test(istream &a){
+    string s;
+    while(a>>s){cout<<s<<endl;}
+    a.clear();
+    return a;
+}
+
+
+int main(){
+    test(cin);
+    return 0;
+}
