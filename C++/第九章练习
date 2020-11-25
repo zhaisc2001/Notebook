@@ -186,7 +186,243 @@ int main(){
     return 0;
 }
 
+9.24:
+#include<iostream>
+#include<vector>
 
+using namespace std;
 
+int main(){
+    vector<int> vec_int;
+    cout<<vec_int.at(0)<<endl;
+    cout<<vec_int[0]<<endl;
+    cout<<vec_int.front()<<endl;
+    cout<<vec_int.back()<<endl;
+    return 0;
+}
 
+9.26:
+#include<iostream>
+#include<vector>
+#include<list>
+
+using namespace std;
+
+int main(){
+    int ia[] = {0,1,1,2,3,5,8,13,21,55,89};
+    vector<int> vec_int;
+    list<int> li_int;
+    for (auto &i:ia){
+        vec_int.push_back(i);
+        li_int.push_back(i);
+    }
+    auto i = vec_int.begin();
+    while(i!=vec_int.end())
+    {
+        if(*i%2 == 1){i = vec_int.erase(i);}
+        else{++i;}
+    }
+    auto j = li_int.begin();
+    while(j!=li_int.end())
+    {
+        if(*j%2 != 1){j = li_int.erase(j);}
+        else{++j;}
+    }
+    for(auto &m:vec_int){cout<<m<<endl;}
+    cout<<"----------------"<<endl;
+    for(auto &m:li_int){cout<<m<<endl;}
+    return 0;
+}
+
+9.27:
+#include<iostream>
+#include<forward_list>
+
+using namespace std;
+
+int main(){
+    forward_list<int> fl_int = {1,2,3,4,5,6,7,8,9};
+    auto prev = fl_int.before_begin();
+    auto curr = fl_int.begin();
+    while (curr != fl_int.end()) {
+        if(*curr %2 == 1){
+            curr = fl_int.erase_after(prev);
+        }
+        else{
+            prev = curr;
+            ++curr;
+        }
+    }
+    for (auto &i:fl_int){cout<<i<<endl;}
+    return 0;
+}
+
+9.28:
+#include<iostream>
+#include<forward_list>
+#include<string>
+
+using namespace std;
+
+forward_list<string> find_and_insert(forward_list<string> fl_str,const string a,const string b){
+    auto prev = fl_str.before_begin();
+    auto curr = fl_str.begin();
+    while (curr != fl_str.end()) {
+        if (*curr == a) {
+            curr = fl_str.insert_after(prev, b);
+            return fl_str;
+        }
+        else {
+            prev = curr;
+            ++curr;
+        }
+    }
+    curr = fl_str.insert_after(prev, b);
+    return fl_str;
+};
+
+int main(){
+    forward_list<string> fl_str = {"a","b","c","e","f"};
+    fl_str = find_and_insert(fl_str, "h", "d");
+    for(auto &i:fl_str){cout<<i<<endl;}
+}
+
+9.31:#include<iostream>
+#include<forward_list>
+#include<list>
+
+using namespace std;
+
+int main(){
+    forward_list<int> fl_int = {0,1,2,3,4,5,6,7,8,9};
+    list<int> li_int = {0,1,2,3,4,5,6,7,8,9};
+    auto prev = fl_int.before_begin();
+    auto curr = fl_int.begin();
+    auto i = li_int.begin();
+    while(curr != fl_int.end()){
+        if(*curr%2){
+            curr = fl_int.insert_after(prev, *curr);
+            ++curr;
+            prev = curr;
+            ++curr;
+        }
+        else{
+            curr = fl_int.erase_after(prev);
+        }
+    }
+    while(i != li_int.end()){
+        if(*i%2){
+            i = li_int.insert(i, *i);
+            ++i;
+            ++i;
+        }
+        else{
+            i = li_int.erase(i);
+        }
+    }
+    for(auto &j:fl_int){cout<<j<<endl;}
+    for(auto &j:li_int){cout<<j<<endl;}
+}
+
+9.41:
+#include<iostream>
+#include<vector>
+#include<string>
+
+using namespace std;
+
+int main(){
+    vector<char> vec_ch = {'H','i'};
+    string s(vec_ch.begin(),vec_ch.end());
+    cout<<s<<endl;
+    return 0;
+}
+
+9.43:
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+void func(string &s, string &oldVal, string &newVal) {
+	auto iter = s.begin();
+	while (iter + oldVal.size() != s.end()) {
+		if (oldVal == string(iter, iter + oldVal.size())) {
+			iter = s.erase(iter, iter + oldVal.size());
+			iter = s.insert(iter, newVal.begin(), newVal.end());
+			iter += newVal.size();
+		}
+		else {
+			++iter;
+		}
+	}
+}
+
+int main() {
+	string s("though,you don't love me");
+	string oldVal("though");
+	string newVal("tho");
+	func(s, oldVal, newVal);
+	cout << s;
+	return 0;
+}
+
+9.43:
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+void func(string &s, string &oldVal, string &newVal) {
+    auto iter = s.begin();
+    while (iter + oldVal.size() != s.end()) {
+        if (oldVal == string(iter, iter + oldVal.size())) {
+            iter = s.erase(iter, iter + oldVal.size());
+            iter = s.insert(iter, newVal.begin(), newVal.end());
+            iter += newVal.size();
+        }
+        else {
+            ++iter;
+        }
+    }
+}
+
+int main() {
+    string s("though,you don't love me");
+    string oldVal("though");
+    string newVal("tho");
+    func(s, oldVal, newVal);
+    cout << s;
+    return 0;
+}
+
+9.44:
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+void func(string &s, string &oldVal, string &newVal) {
+	string::size_type i = 0;
+	auto s_len = s.size(), old_len = oldVal.size();
+	while (i + old_len <= s_len) {
+		if (oldVal == s.substr(i, i + old_len)) {
+			s.replace(i, i + old_len, newVal);
+			i += newVal.size();
+		}
+		else {
+			++i;
+		}
+	}
+}
+int main() {
+	string s("though,you don't love me");
+	string oldVal("though");
+	string newVal("tho");
+	func(s, oldVal, newVal);
+	cout << s << endl;
+
+	system("pause");
+	return 0;
+}
 
