@@ -1,0 +1,192 @@
+9.2:
+#include<iostream>
+#include<list>
+#include<deque>
+
+using namespace std;
+
+int main(){
+    list<deque<int>> li_de_int;
+    return 0;
+}
+
+9.4:
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+bool find_int(vector<int>::iterator bgn,vector<int>::iterator ed,const int &c)
+{
+    int b = 0;
+    while(bgn!=ed){b = (*bgn==c)?(b+1):b;++bgn;}
+    bool a = (b);
+    return a;
+}
+
+int main(){
+    vector<int> v{1,2,3,4,5,6,7,8,7};
+    cout<<find_int(v.begin(), v.end(), 10)<<endl;
+    return 0;
+}
+
+9.5:
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+vector<int>::iterator find_int(vector<int>::iterator bgn,vector<int>::iterator ed,const int &c)
+{
+    vector<int>::iterator i = bgn;
+    while(i!=ed)
+    {
+        if (*i==c) {
+            return i;
+        }
+        else{++i;}
+    }
+    return ed;
+}
+
+int main(){
+    vector<int> v{1,2,3,4,5,6,7,8,7};
+    cout<<*find_int(v.begin(), v.end(), 123)<<endl;
+    return 0;
+}
+
+9.13:
+#include<iostream>
+#include<vector>
+#include<list>
+
+using namespace std;
+
+int main(){
+    list<int> a = {1,2,3,4,5};
+    vector<double> b (a.begin(),a.end());
+    for(auto &i:b){cout<<i<<endl;}
+    vector<int> c = {1,2,3,4,5,6};
+    vector<double> d (c.begin(),c.end());
+    for(auto &i:d){cout<<i<<endl;}
+    return 0;
+}
+
+9.14:
+#include<iostream>
+#include<vector>
+#include<list>
+
+using namespace std;
+
+int main(){
+    list<char *> a = {"s","s","b","t"};
+    vector<string> b;
+    b.assign(a.begin(), a.end());
+    for(auto &i:b){cout<<i<<endl;}
+    return 0;
+}
+
+9.15:
+#include<iostream>
+#include<vector>
+#include<list>
+
+using namespace std;
+
+bool compare(vector<int> a,vector<int> b){
+    int c = 0;
+    if (a.size() != b.size()){return bool(c);}
+    else{
+        for(auto i = a.begin(),j = b.begin();i!=a.end();++i,++j){
+            if (*i!=*j) {
+                return bool(c);
+            }
+        }
+    }
+    return bool(c+1);
+}
+
+int main(){
+    vector<int> a (5,1);
+    vector<int> b (5,1);
+    cout<<compare(a, b)<<endl;
+    vector<int> c (5,2);
+    cout<<compare(a, c)<<endl;
+    vector<int> d (6,1);
+    cout<<compare(a, d)<<endl;
+    return 0;
+}
+
+9.16:
+#include<iostream>
+#include<vector>
+#include<list>
+
+using namespace std;
+
+bool compare(vector<int> a,list<int> b){
+    int c = 0;
+    if (a.size() != b.size()){return bool(c);}
+    else{
+        auto j = b.begin();
+        for(auto i = a.begin();i!=a.end();++i,++j){
+            if (*i!=*j) {
+                return bool(c);
+            }
+        }
+    }
+    return bool(c+1);
+}
+
+int main(){
+    vector<int> a (5,1);
+    list<int> b (5,1);
+    cout<<compare(a, b)<<endl;
+    list<int> c (5,2);
+    cout<<compare(a, c)<<endl;
+    list<int> d (6,1);
+    cout<<compare(a, d)<<endl;
+    return 0;
+}
+
+9.18:
+#include<iostream>
+#include<deque>
+#include<string>
+
+using namespace std;
+
+int main(){
+    deque<string> de_string;
+    string s;
+    while(cin>>s)
+    {
+        de_string.push_back(s);
+    }
+    for(auto &i:de_string){cout<<i<<endl;}
+    return 0;
+}
+
+9.19:
+#include<iostream>
+#include<list>
+#include<string>
+
+using namespace std;
+
+int main(){
+    list<string> de_string;
+    string s;
+    while(cin>>s)
+    {
+        de_string.push_back(s);
+    }
+    for(auto &i:de_string){cout<<i<<endl;}
+    return 0;
+}
+
+
+
+
+
