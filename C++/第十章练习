@@ -1,0 +1,31 @@
+10.1，10.2:
+#include<iostream>
+#include<vector>
+#include<list>
+#include<algorithm>
+#include<string>
+
+using namespace std;
+
+int main() {
+    vector<int> vec_int = {1,2,3,4,5,6,7,8,8,8,8};
+    list<string> li_str = {"a","b","c","a"};
+    cout<<count(vec_int.begin(), vec_int.end(), 8)<<endl;;
+    cout<<count(li_str.begin(),li_str.end(),"a")<<endl;
+    return 0;
+}
+
+10.3:
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<numeric>
+
+using namespace std;
+
+int main() {
+    vector<int> vec_int = {1,2,3,4,5,6,7,8,8,8,8};
+    int sum = accumulate(vec_int.begin(),vec_int.end(),0);
+    cout<<sum<<endl;
+    return 0;
+}
