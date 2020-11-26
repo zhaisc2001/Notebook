@@ -29,3 +29,89 @@ int main() {
     cout<<sum<<endl;
     return 0;
 }
+
+10.6:
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<numeric>
+
+using namespace std;
+
+int main() {
+    vector<int> vec_int = {1,2,3,4,5,6,7,8,8,8,8};
+    fill_n(vec_int.begin(),sizeof(vec_int),0);
+    for(auto &j:vec_int){cout<<j<<endl;}
+    return 0;
+}
+
+10.9:
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<numeric>
+#include<string>
+
+using namespace std;
+
+void elimDups(vector<string> &words)
+{
+    auto words_end = unique(words.begin(),words.end());
+    words.erase(words_end,words.end());
+}
+
+int main() {
+    vector<string> vec_str = {"the","quick","red","fox","jumps","over","the","slow","red","turtle"};
+    elimDups(vec_str);
+    for(auto &j:vec_str){cout<<j<<endl;}
+    return 0;
+}
+
+10.11:
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<numeric>
+#include<string>
+
+using namespace std;
+
+void elimDups(vector<string> &words)
+{
+    auto words_end = unique(words.begin(),words.end());
+    words.erase(words_end,words.end());
+}
+
+bool isShorter(const string &a,const string &b)
+{
+    return a.size()<b.size();
+}
+
+int main() {
+    vector<string> vec_str = {"the","quick","red","fox","jumps","over","the","slow","red","turtle"};
+    elimDups(vec_str);
+    stable_sort(vec_str.begin(),  vec_str.end(), isShorter);
+    for(auto &j:vec_str){cout<<j<<endl;}
+    return 0;
+}
+
+10.13:
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<numeric>
+#include<string>
+
+using namespace std;
+
+bool isFiver(const string &a)
+{
+    return a.size()<5;
+}
+
+int main() {
+    vector<string> vec_str = {"the","quick","red","fox","jumps","over","the","slow","red","turtle"};
+    auto five = partition(vec_str.begin(), vec_str.end(), isFiver);
+    while(five != vec_str.end()){cout<<*five<<endl;++five;}
+    return 0;
+}
