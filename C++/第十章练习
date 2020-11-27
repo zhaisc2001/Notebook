@@ -160,3 +160,47 @@ int main() {
     cout<<a<<endl;
     return 0;
 }
+
+10.27:
+#include<iostream>
+#include<vector>
+#include<list>
+#include<algorithm>
+
+
+using namespace std;
+
+
+int main() {
+    vector<int> vec_int = {1,2,3,4,5,6,7,8,7,8,4,1,2};
+    list<int> li_int;
+    sort(vec_int.begin(),vec_int.end());
+    unique_copy(vec_int.begin(),vec_int.end(),back_inserter(li_int));
+    for(auto &i:li_int){cout<<i<<endl;}
+    return 0;
+}
+
+10.28:
+#include<iostream>
+#include<vector>
+#include<list>
+#include<algorithm>
+
+
+using namespace std;
+
+
+int main() {
+    vector<int> vec_int = {1,2,3,4,5,6,7,8,7,8,4,1,2};
+    vector<int> vec_inserter,vec_back;
+    list<int> li_front;
+    copy(vec_int.begin(), vec_int.end(), inserter(vec_inserter,vec_inserter.begin()));
+    copy(vec_int.begin(), vec_int.end(), back_inserter(vec_back));
+    copy(vec_int.begin(), vec_int.end(), front_inserter(li_front));
+    for(auto &i:vec_inserter){cout<<i<<endl;}
+    cout<<"-------------"<<endl;
+    for(auto &j:vec_back){cout<<j<<endl;}
+    cout<<"-------------"<<endl;
+    for(auto &k:li_front){cout<<k<<endl;}
+    return 0;
+}
