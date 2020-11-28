@@ -204,3 +204,48 @@ int main() {
     for(auto &k:li_front){cout<<k<<endl;}
     return 0;
 }
+
+10.29:
+#include<iostream>
+#include<fstream>
+#include<vector>
+#include<string>
+#include<algorithm>
+
+using namespace std;
+
+int main() {
+    vector<string> vec_str;
+    ifstream myfile("/Users/violet/Downloads/threekingdoms.txt");
+    istream_iterator<string> item_iter(myfile),eof;
+    string s;
+    while(item_iter!=eof){
+        vec_str.push_back(*item_iter++);
+    }
+    for(auto &i:vec_str){cout<<i<<endl;}
+    return 0;
+}
+
+10.34:
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+int main() {
+    vector<int> vec_int {1,2,3,4,5,6,7,8,9};
+    for(auto i = vec_int.crbegin();i!=vec_int.crend();++i){cout<<*i<<endl;}
+    return 0;
+}
+
+10.35:
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+int main() {
+    vector<int> vec_int {1,2,3,4,5,6,7,8,9};
+    for(auto i = vec_int.end();i!=vec_int.begin()-1;--i){cout<<*i<<endl;}
+    return 0;
+}
