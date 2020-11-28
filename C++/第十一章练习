@@ -1,0 +1,114 @@
+11.3:
+#include<iostream>
+#include<string>
+#include<map>
+
+
+using namespace std;
+
+int main() {
+    map<string,size_t> word_count;
+    string word;
+    while(cin>>word){
+        word_count[word]++;
+    }
+    for (auto &i:word_count){
+        cout<<i.first<<" occurs "
+        <<i.second<<((i.second>1) ? " times." : " time.")<<endl;
+    }
+    return 0;
+}
+
+11.7:
+#include<iostream>
+#include<string>
+#include<map>
+#include<vector>
+
+
+using namespace std;
+
+int main() {
+    map<string,vector<string>> family = {{"wf",{"xwx","xzh"}},{"wp",{"shn","scj"}}};
+    family["wn"]={"se","wm"};
+    family["wp"].push_back("sxx");
+    for(auto &i:family){cout<<i.first<<endl;}
+    return 0;
+}
+
+11.12:
+#include<iostream>
+#include<string>
+#include<map>
+#include<vector>
+
+
+using namespace std;
+
+int main() {
+    vector<string> vec_str = {"Alpha","Beta","Cathy","David"};
+    vector<int> vec_int = {22,34,26,48};
+    pair<string, int> age_pair;
+    vector<pair<string, int>> vec_pair;
+    auto j = vec_str.begin();
+    for(auto i = vec_int.begin();i!=vec_int.end();++i,++j){
+        age_pair = {*j,*i};
+        vec_pair.push_back(age_pair);
+    }
+    return 0;
+}
+
+11.16:
+#include<iostream>
+#include<string>
+#include<map>
+#include<vector>
+
+
+using namespace std;
+
+int main() {
+    map<string,int> age = {{"Steven",5}};
+    age.begin() -> second = 15;
+    cout<<age.begin()->second<<endl;
+    return 0;
+}
+
+11.20:
+#include<iostream>
+#include<string>
+#include<map>
+#include<vector>
+
+
+using namespace std;
+
+int main() {
+    map<string,int> count_word;
+    vector<string> vec_str {"a","b","c","a"};
+    string s;
+    auto bgn = vec_str.begin();
+    while(bgn != vec_str.end()){
+        auto ret = count_word.insert({*bgn,1});
+        if(!ret.second){++ret.first->second;}
+        ++bgn;
+    }
+    cout<<"success!"<<endl;
+    return 0;
+}
+
+11.28:
+#include<iostream>
+#include<string>
+#include<map>
+#include<vector>
+
+
+using namespace std;
+
+int main() {
+    map<string,int> map_find{{"Alpha",15}};
+    auto i = map_find.find("Alpha");
+    cout<<i->second<<endl;
+    return 0;
+}
