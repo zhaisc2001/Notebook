@@ -215,3 +215,20 @@ int main(){
     delete [] p;
     return 0;
 }
+
+12.26:
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+int main(){
+    allocator<string> alloc_s;
+    auto p = alloc_s.allocate(10);
+    auto q = p;
+    string s;
+    while(cin>>s && q != p+10){alloc_s.construct(q++, s);}
+    while(q != p){alloc_s.destroy(--q);}
+    alloc_s.deallocate(p, 10);
+    return 0;
+}
