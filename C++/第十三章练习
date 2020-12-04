@@ -1,0 +1,84 @@
+13.5:
+#include<iostream>
+#include<string>
+#include<fstream>
+#include<vector>
+#include<sstream>
+#include<map>
+#include<set>
+
+using namespace std;
+
+class HasPtr {
+public:
+    HasPtr(const string &s = string()) : ps(new string(s)),i(0) {}
+    HasPtr(const HasPtr& hp):ps(new string (*hp.ps)),i(hp.i) {}
+private:
+    string *ps;
+    int i;
+};
+
+int main(){
+    return 0;
+}
+
+13.8:
+#include<iostream>
+#include<string>
+#include<fstream>
+#include<vector>
+#include<sstream>
+#include<map>
+#include<set>
+
+using namespace std;
+
+class HasPtr {
+public:
+    HasPtr(const string &s = string()) : ps(new string(s)),i(0) {}
+    HasPtr(const HasPtr& hp):ps(new string (*hp.ps)),i(hp.i) {}
+    HasPtr& operator=(const HasPtr&);
+private:
+    string *ps;
+    int i;
+};
+
+HasPtr& HasPtr::operator=(const HasPtr& hp){
+    ps = new string (*hp.ps);
+    return *this;
+}
+
+int main(){
+    return 0;
+}
+
+13.11:
+#include<iostream>
+#include<string>
+#include<fstream>
+#include<vector>
+#include<sstream>
+#include<map>
+#include<set>
+
+using namespace std;
+
+class HasPtr {
+public:
+    HasPtr(const string &s = string()) : ps(new string(s)),i(0) {}
+    HasPtr(const HasPtr& hp):ps(new string (*hp.ps)),i(hp.i) {}
+    HasPtr& operator=(const HasPtr&);
+    ~HasPtr() {}
+private:
+    string *ps;
+    int i;
+};
+
+HasPtr& HasPtr::operator=(const HasPtr& hp){
+    ps = new string (*hp.ps);
+    return *this;
+}
+
+int main(){
+    return 0;
+}
