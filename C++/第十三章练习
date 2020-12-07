@@ -82,3 +82,61 @@ HasPtr& HasPtr::operator=(const HasPtr& hp){
 int main(){
     return 0;
 }
+
+13.17:
+#include<iostream>
+#include<string>
+#include<fstream>
+#include<vector>
+#include<sstream>
+#include<map>
+#include<set>
+
+using namespace std;
+
+class numbered{
+public:
+    numbered(){static int mysn1 = -1;mysn = ++mysn1;}
+    numbered(numbered &a){mysn = a.mysn+1;}
+    int mysn = 0;
+};
+
+void f(const numbered& s){cout<<s.mysn<<endl;}
+
+int main(){
+    numbered a,b = a,c = b;
+    f(a);f(b);f(c);
+    return 0;
+}
+
+13.22:
+#include<iostream>
+#include<string>
+#include<fstream>
+#include<vector>
+#include<sstream>
+#include<map>
+#include<set>
+
+using namespace std;
+
+class Hasptr{
+public:
+    Hasptr();
+    Hasptr(const Hasptr& hp) : sp(new string (*hp.sp)),i(hp.i){}
+    Hasptr& operator=(const Hasptr& hp){
+        auto new_ps = new string (*hp.sp);
+        delete sp;
+        sp = new_ps;
+        return *this;
+    }
+    ~Hasptr();
+private:
+    string* sp;
+    int i;
+};
+
+int main(){
+
+    return 0;
+}
