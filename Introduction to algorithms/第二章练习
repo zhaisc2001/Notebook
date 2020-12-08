@@ -1,0 +1,29 @@
+INSERTION_SORT C++实现：
+#include<iostream>
+#include<string>
+#include<fstream>
+#include<vector>
+#include<sstream>
+#include<map>
+#include<set>
+
+using namespace std;
+
+int main(){
+    vector<int> vec_int;
+    for(int i = 0;i != 10;++i){
+        vec_int.push_back(i);
+    }
+//    for(auto &i:vec_int){cout<<i<<endl;}
+    for(int j = 1;j!=vec_int.size();j++){
+        auto key = vec_int[j];
+        auto i = j - 1;
+        while(i >= 0 && vec_int[i]<key){
+            vec_int[i+1] = vec_int[i];
+            --i;
+        }
+        vec_int[i+1] = key;
+    }
+    for(auto &i:vec_int){cout<<i<<endl;}
+    return 0;
+}
