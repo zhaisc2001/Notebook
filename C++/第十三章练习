@@ -140,3 +140,133 @@ int main(){
 
     return 0;
 }
+
+13.27：
+#include<iostream>
+#include<string>
+#include<fstream>
+#include<vector>
+#include<sstream>
+#include<map>
+#include<set>
+
+using namespace std;
+
+class Hasptr{
+public:
+    Hasptr(const string& s) : sp(new string (s)) ,i(0),use(new size_t(1)){}
+    Hasptr(const Hasptr& hp) : sp(hp.sp),i(hp.i),use(hp.use){++*use;}
+    Hasptr& operator=(const Hasptr& hp);
+    ~Hasptr();
+private:
+    string* sp;
+    int i;
+    size_t* use;
+};
+
+Hasptr::~Hasptr(){
+    if(--*use==0){
+        delete sp;
+        delete use;
+    }
+}
+
+Hasptr& Hasptr::operator=(const Hasptr& hp){
+    ++*hp.use;
+    if(--*use==0){
+        delete sp;
+        delete use;
+    }
+    sp = hp.sp;
+    use = hp.use;
+    i = hp.i;
+    return *this;
+}
+
+int main(){
+
+    return 0;
+}
+
+13.30:
+inline
+void swap(Hasptr&lhp,Hasptr&rhp){
+    using std::swap;
+    cout<<"SWAP!"<<endl;
+    swap(lhp.sp, rhp.sp);
+    swap(lhp.i,rhp.i);
+}
+
+13.31:
+#include<iostream>
+#include<string>
+#include<fstream>
+#include<vector>
+#include<sstream>
+#include<map>
+#include<set>
+
+using namespace std;
+
+class Hasptr{
+public:
+    friend void swap(Hasptr&,Hasptr&);
+    friend bool operator<(const Hasptr&,const Hasptr&);
+    friend void show(Hasptr&);
+    Hasptr(const string& s) : sp(new string (s)) ,i(0),use(new size_t(1)){}
+    Hasptr(const Hasptr& hp) : sp(hp.sp),i(hp.i),use(hp.use){++*use;}
+    Hasptr& operator=(const Hasptr& hp);
+    ~Hasptr();
+private:
+    string* sp;
+    int i;
+    size_t* use;
+};
+
+inline
+void swap(Hasptr&lhp,Hasptr&rhp){
+    using std::swap;
+    cout<<"SWAP!"<<endl;
+    swap(lhp.sp, rhp.sp);
+    swap(lhp.i,rhp.i);
+}
+
+inline
+bool operator<(const Hasptr& a,const Hasptr& b){
+    return *a.sp<*b.sp;
+}
+
+inline
+void show(Hasptr& hp){
+    cout<<*hp.sp<<endl;
+}
+
+Hasptr::~Hasptr(){
+    if(--*use==0){
+        delete sp;
+        delete use;
+    }
+}
+
+Hasptr& Hasptr::operator=(const Hasptr& hp){
+    ++*hp.use;
+    if(--*use==0){
+        delete sp;
+        delete use;
+    }
+    sp = hp.sp;
+    use = hp.use;
+    i = hp.i;
+    return *this;
+}
+
+int main(){
+    vector<Hasptr> vec_hash;
+    Hasptr A("A"),B("Z"),C("S");
+    vec_hash.push_back(A);
+    vec_hash.push_back(B);
+    vec_hash.push_back(C);
+    sort(vec_hash.begin(), vec_hash.end());
+    for(auto &i:vec_hash){show(i);}
+    return 0;
+}
