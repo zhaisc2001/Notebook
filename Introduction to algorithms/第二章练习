@@ -53,3 +53,41 @@ for i in range(-1,-len(A)-1,-1):
         C[i] = 1
         dev = 1
 C[0] = dev
+
+
+2.2-1:theta(n^3)
+2.2-2:选择算法
+#include<iostream>
+#include<string>
+#include<fstream>
+#include<vector>
+#include<sstream>
+#include<map>
+#include<set>
+
+using namespace std;
+
+int main(){
+    vector<int> a = {2,4,6,1,19,11,8};
+    for(auto i = 0;i != a.size()-1;++i){
+        auto j = i;
+        auto minimize = a[i];
+        auto minimize_num = i;
+        while(j!=a.size()){
+            if(a[j]<minimize){
+            minimize = a[j];
+            minimize_num = j;
+            }
+            ++j;
+        }
+        if(minimize_num!=i){swap(a[i], a[minimize_num]);}
+        for(auto &m:a){cout<<m<<endl;}
+        cout<<"-----------------------"<<endl;
+    }
+    return 0;
+}
+当我们进行了n-1次交换后，排在A[n]的一定是数组最大的元素;
+best:theta(n^2);worst:theta(n^2);
+
+2.2-3:为了体现出等可能性，至少要进行n次线性查找，平均和最坏需要theta(n^2)
+2.2-4:添加判断语句，假如输入符合最好情况，直接输出；
