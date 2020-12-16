@@ -34,3 +34,106 @@ double print_total(ostream &os,const Quote &item,size_t n){
 int main() {
     return 0;
 }
+
+15.4:
+(a)False,一个类不能是自己的派生类；
+(b)正确
+(c)错误，派生类的声明不能包含派生列表；
+
+15.6:
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+class Quote{
+public:
+    Quote()=default;
+    Quote(const string &book,double sales_price) : bookNo(book),price(sales_price){}
+    string isbn() const {return bookNo;}
+    virtual double net_price(size_t n) const {return n*price;}
+    virtual ~Quote() = default;
+private:
+    string bookNo;
+protected:
+    double price = 0.0;
+};
+
+class Bulk_quote:public Quote{
+public:
+    Bulk_quote(const string &book,double p,size_t qty,double disc):
+    Quote(book,p),min_qty(qty),discount(disc) { }
+    double net_price(size_t) const override;
+private:
+    size_t min_qty = 0;
+    double discount = 0.0;
+};
+
+double print_total(ostream &os,const Quote &item,size_t n){
+    double ret = item.net_price(n);
+    os<<"ISBN:"<<item.isbn()<<"# sold:"<<n<<" total due:"<<ret<<endl;
+    return ret;
+}
+
+double Bulk_quote::net_price(size_t cnt) const {
+    if(cnt >= min_qty){return cnt*(1-discount)*price;}
+    else{return cnt*price;}
+}
+
+int main() {
+    Quote Dragon_Raja("Dragon raja",44.8);
+    Bulk_quote Dragon("Dragon raja",44.8,10,0.23);
+    print_total(cout, Dragon_Raja, 15);
+    print_total(cout, Dragon, 17);
+    return 0;
+}
+
+15.7:
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+class Quote{
+public:
+    Quote()=default;
+    Quote(const string &book,double sales_price) : bookNo(book),price(sales_price){}
+    string isbn() const {return bookNo;}
+    virtual double net_price(size_t n) const {return n*price;}
+    virtual ~Quote() = default;
+private:
+    string bookNo;
+protected:
+    double price = 0.0;
+};
+
+class Bulk_quote:public Quote{
+public:
+    Bulk_quote(const string &book,double p,size_t qty_1,size_t qty_2,double disc):
+    Quote(book,p),min_qty(qty_1),max_qty(qty_2),discount(disc) { }
+    double net_price(size_t) const override;
+private:
+    size_t min_qty = 0;
+    size_t max_qty = 0;
+    double discount = 0.0;
+};
+
+double print_total(ostream &os,const Quote &item,size_t n){
+    double ret = item.net_price(n);
+    os<<"ISBN:"<<item.isbn()<<"# sold:"<<n<<" total due:"<<ret<<endl;
+    return ret;
+}
+
+double Bulk_quote::net_price(size_t cnt) const {
+    if(cnt >= min_qty && cnt <= max_qty){return cnt*discount*price;}
+    else if (cnt > max_qty){return (cnt-max_qty)*price+max_qty*discount*price;}
+    else{return cnt*price;}
+}
+
+int main() {
+    Quote Dragon_Raja("Dragon raja",44.8);
+    Bulk_quote Dragon("Dragon raja",44.8,10,15,0.77);
+    print_total(cout, Dragon_Raja, 15);
+    print_total(cout, Dragon, 17);
+    return 0;
+}
