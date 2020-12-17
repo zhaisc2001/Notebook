@@ -146,3 +146,31 @@ int main() {
 15.10:动态绑定：ifstream是istream的派生类；
 
 15.12:有必要，我们可以对一个派生类的虚函数进行覆盖基类同时禁止这个派生类的派生类的虚函数覆盖的操作；
+
+15.15:
+class Disc_quote : public Quote{
+public:
+    Disc_quote()=default;
+    Disc_quote(const string& book,double price,size_t qty,double disc):
+    Quote(book,price),quantity(qty),discount(disc) { }
+    double net_price(size_t) const = 0;
+protected:
+    size_t quantity = 0;
+    double discount = 0.0;
+};
+
+15.17:Variable type 'Disc_quote' is an abstract class
+
+15.18:
+不能对不可访问的基类进行转换；
+
+15.19:
+1： 假定B继承自A，无论B以什么方式继承A，B的成员函数和友元都能使用派生类到基类的转换
+2： B继承A的方式是公有或者保护，则B的派生类的成员或友元可以使用B到A的转换，若未私有则不行
+3： B继承A的方式是公有的，用户的代码才能使用B到A的（派生类到基类）的转换，保护或者私有方式则不行
+
+15.24:
+基类，动态删除基类指针；
+
+15.25:派生类的基类的默认构造函数是不可访问的或删除的，派生类的默认构造函数也是删除的，此时会导致派生类的默认
+初始化时报错；
