@@ -113,3 +113,36 @@ int main() {
     cout<<BINARY_SEARCH(a, 3, 0, 7)<<endl;
     return 0;
 }
+
+2.3-6:不可以，INSERTION_SORT的5-7行实际上进行的主要工作是将当前数调换到合适的地方去；
+即使使用二分查找，也不能使时间复杂度降到theta(nlgn)，也会是theta(n^2)；
+
+2.3-7:使用merge_sort和binary_search即可在theta(nlgn)时间内完成；
+
+思考题2-1:a.对于输入规模为n的数据，插入排序时间复杂度为theta(n^2);
+对于输入规模为n/k*k的数据，插入排序时间复杂度为n/k*theta(k^2)=theta(nk);
+b.合并n/k个子表->theta(lg(n/k))，总输入规模为n，所以总时间复杂度为theta(nlg(n/k))；
+c.归并算法的时间复杂度为theta(nlgn),我们取k=lgn，则在忽略低次项后，修改后算法时间复杂度与归并算法
+具有相同的运行时间；
+d.选择小于lgn的k值；
+
+2-2:
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+void BUBBLE_SORT(vector<int> &A,int q){
+    for(auto i = 0;i < q;++i){
+        for(auto j = A.size()-1;j != i;--j){
+            if(A[j] < A[j-1]){swap(A[j], A[j-1]);}
+        }
+    }
+}
+
+int main(){
+    vector<int> a = {3,4,5,6,7,8,1,2};
+    BUBBLE_SORT(a, 7);
+    for(auto &i:a){cout<<i<<endl;}
+    return 0;
+}
