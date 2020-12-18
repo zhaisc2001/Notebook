@@ -91,3 +91,25 @@ best:theta(n^2);worst:theta(n^2);
 
 2.2-3:为了体现出等可能性，至少要进行n次线性查找，平均和最坏需要theta(n^2)
 2.2-4:添加判断语句，假如输入符合最好情况，直接输出；
+
+2.3-5:#include<iostream>
+#include<string>
+#include<vector>
+
+using namespace std;
+
+int BINARY_SEARCH(vector<int> &A,int p,int f,int e){
+    if (f<=e){
+        int q = (f+e)/2;
+        if (A[q]==p){return q;}
+        else if (A[q]<p){return BINARY_SEARCH(A, p, q+1, e);}
+        else if (A[q]>p){return BINARY_SEARCH(A, p, f, q-1);}
+    }
+    return -1;
+}
+
+int main() {
+    vector<int> a = {1,2,3,4,5,6,7,8};
+    cout<<BINARY_SEARCH(a, 3, 0, 7)<<endl;
+    return 0;
+}
