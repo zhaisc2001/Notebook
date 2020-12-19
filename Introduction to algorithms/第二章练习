@@ -89,6 +89,32 @@ int main(){
 当我们进行了n-1次交换后，排在A[n]的一定是数组最大的元素;
 best:theta(n^2);worst:theta(n^2);
 
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+void merge(vector<int> &A,int p,int q,int r){
+    vector<int> L(A.begin()+p,A.begin()+q+1);
+    vector<int> R(A.begin()+q+1,A.begin()+r+1);
+    L.insert(L.end(), INT_MAX);
+    R.insert(R.end(), INT_MAX);
+    int i = 0,j = 0;
+    for (auto k = p;k <= r;++k){
+        if(L[i]<=R[j]){A[k]=L[i];++i;}
+        else if(L[i]>R[j]){A[k]=R[j];++j;}
+    }
+}
+
+void merge_sort(vector<int> &A,int p,int r){
+    if (p<r){
+        int q = (p+r)/2;
+        merge_sort(A, p, q);
+        merge_sort(A,q+1,r);
+        merge(A, p, q, r);
+    }
+}
+
 2.2-3:为了体现出等可能性，至少要进行n次线性查找，平均和最坏需要theta(n^2)
 2.2-4:添加判断语句，假如输入符合最好情况，直接输出；
 
@@ -144,5 +170,60 @@ int main(){
     vector<int> a = {3,4,5,6,7,8,1,2};
     BUBBLE_SORT(a, 7);
     for(auto &i:a){cout<<i<<endl;}
+    return 0;
+}
+
+a:证明子数组是原数组的一部分；
+b:初始化：j = A.length
+保持：在j达到i+1之后才会终止，它的每一次循环都将将i变成数组从i到A.length最小的数；
+终止：当j达到i+1后，它已经恰好把最小的数移动到第i位；
+c:和b题大致相同，主要是要说明当A[1],A[2],...,A[A.length-1]刚好是数组第1小、第2小...第A.length-1小的数时，
+A[A.length]毫无疑问就是数组的最大值；
+d:theta(n^2)，插入排序的时间复杂度为theta(n^2)，所以他们性能实际上是一样的；
+
+2-3:
+a.theta(n)
+b.时间复杂度为theta(n^2)，注意乘方操作不像加法操作一样在常数时间内就可以完成；
+c.
+
+2-4:a.<1,5>,<2,5>,<3,5>,<4,5>,<3,4>
+b.{n,n-1,...,1}从大到小排列的数组具有最多的逆序对，有n*(n-1)/2个；
+c.数组里的逆序对越多，插入排序时间越长；
+d.#include<iostream>
+#include<vector>
+
+using namespace std;
+
+int merge(vector<int> &A,int p,int q,int r){
+    int cnt = 0;
+    vector<int> L(A.begin()+p,A.begin()+q+1);
+    vector<int> R(A.begin()+q+1,A.begin()+r+1);
+    L.insert(L.end(), INT_MAX);
+    R.insert(R.end(), INT_MAX);
+    int length_A = q-p+1;
+    int i = 0,j = 0;
+    for (auto k = p;k <= r;++k){
+        if(L[i]<=R[j]){A[k]=L[i];++i;}
+        else {if(L[i]!=INT_MAX){cnt+=length_A-i;}A[k]=R[j];++j;}
+    }
+    return cnt;
+}
+
+int merge_sort(vector<int> &A,int p,int r){
+    int cnt = 0;
+    if (p<r){
+        int q = (p+r)/2;
+        cnt += merge_sort(A, p, q);
+        cnt += merge_sort(A,q+1,r);
+        cnt += merge(A, p, q, r);
+    }
+    return cnt;
+}
+
+int main(){
+    vector<int> A = {5,4,3,2,1};
+    auto a = merge_sort(A, 0, 4);
+    for(auto &i:A){cout<<i<<endl;}
+    cout<<a<<endl;
     return 0;
 }
