@@ -1,0 +1,27 @@
+4.1-1:返回首元素；
+
+4.2-2:
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+void FIND_MAXIMUM_SUBARRAY(vector<int> &A,vector<int> &B){
+    int max_sum = INT_MIN;
+    for (auto i=0; i!=A.size(); i++) {
+        int sum = 0;
+        for (auto j=i; j!=A.size();j++){
+            sum += A[j];
+            if(sum>max_sum){max_sum=sum;B[0]=i;B[1]=j;}
+        }
+    }
+    B[2]=max_sum;
+}
+
+int main(){
+    vector<int> A = {3,-4,2,6,7};
+    vector<int> B = {0,0,0};
+    FIND_MAXIMUM_SUBARRAY(A, B);
+    for(auto &i:B){cout<<i<<endl;}
+    return 0;
+}
