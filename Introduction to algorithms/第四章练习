@@ -1,6 +1,7 @@
 4.1-1:返回首元素；
 
-4.2-2:
+4.1-2:
+暴力求解
 #include<iostream>
 #include<vector>
 
@@ -25,3 +26,91 @@ int main(){
     for(auto &i:B){cout<<i<<endl;}
     return 0;
 }
+
+4.1-3:
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+vector<int> FIND_MAX_CEOSSING_SUBARRAY(vector<int> &A,vector<int> &B,int low,int mid,int high){
+    int left_sum = INT_MIN;
+    int sum = 0;
+    int max_left = 0;
+    int max_right = 0;
+    for (auto i = mid;i>=low;--i){
+        sum+=A[i];
+        if (sum>left_sum){left_sum=sum;max_left=i;}
+    }
+    int right_sum = INT_MIN;
+    sum = 0;
+    for(auto j = mid+1;j<=high;++j){
+        sum+=A[j];
+        if(sum>right_sum){right_sum=sum;max_right=j;}
+    }
+    B[0]=max_left;
+    B[1]=max_right;
+    B[2]=left_sum+right_sum;
+    return B;
+}
+
+vector<int> FIND_MAXIMUM_SUBARRAY(vector<int> &A,int low,int high){
+    vector<int> B = {0,0,0};
+    vector<int> left_B (B);
+    vector<int> right_B (B);
+    vector<int> cross_B (B);
+    if (high==low){B[0]=low;B[1]=high;B[2]=A[low];return B;}
+    else{
+        int mid = (low+high)/2;
+        left_B = FIND_MAXIMUM_SUBARRAY(A, low, mid);
+        right_B = FIND_MAXIMUM_SUBARRAY(A, mid+1, high);
+        cross_B = FIND_MAX_CEOSSING_SUBARRAY(A, B, low, mid, high);
+        if (left_B[2]>=right_B[2]&&left_B[2]>=cross_B[2]) {
+            return left_B;
+        }
+        else if (right_B[2]>=left_B[2]&&right_B[2]>=cross_B[2]){
+            return right_B;
+        }
+        else {return cross_B;}
+    }
+}
+
+int main(){
+    vector<int> A = {3,-4,2,6,7};
+    auto B = FIND_MAXIMUM_SUBARRAY(A, 0, 4);
+    for(auto &i:B){cout<<i<<endl;}
+    return 0;
+}
+求解的是一个2^(cn)=n这样一个超越方程，c因计算机不同和程序设计的不同而不同；
+修改后性能交叉点是不会变的；
+
+4.1-4:
+在返回时添加if判断，如果和为负数那么就返回空数组以及0；
+
+4.1-5:
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+void FIND_MAX_SUBARRAY(vector<int> &A,vector<int> &B){
+    vector<int> C = {0,0,0};
+    int sum = 0;
+    int max_sum = INT_MIN;
+    for (auto i = 0;i<A.size();++i){
+        if(A[i]>0){sum+=A[i];C[1]=i;C[2]=sum;}
+        else{sum=0;C[0]=i+1;C[2]=sum;}
+        if(sum>max_sum){
+            B = C;
+        }
+    }
+}
+
+int main(){
+    vector<int> A = {3,-4,2,6,7};
+    vector<int> B = {0,0,0};
+    FIND_MAX_SUBARRAY(A, B);
+    for(auto &i:B){cout<<i<<endl;}
+    return 0;
+}
+
