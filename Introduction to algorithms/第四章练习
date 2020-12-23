@@ -182,3 +182,7 @@ int main(){
     for(auto &i:a){cout<<i<<endl;}
     return 0;
 }
+
+4.3-1:当c=1时，我们代入可以得到n≥1时，T(n)≤n^2恒成立；
+
+对于求解递推
