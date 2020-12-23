@@ -158,4 +158,27 @@ return C
 lg7≈2.807,这样的算法时快于Strassen算法的；
 
 4.2-6:
-kn*n和n*kn相乘，在需要k^2次乘法
+kn*n和n*kn相乘，在n^2的基础上需要k^2次乘法；
+n*kn和kn*n相乘，需要k次乘法和k-1次加法；
+
+4.2-7:
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+vector<int> complex_multiple(int a,int b,int c,int d){
+    vector<int> A = {0,0};
+    int e = (a+b)*(c+d);
+    int f = a*c;
+    int g = b*d;
+    A[0] = f-g;
+    A[1] = e-f-g;
+    return A;
+}
+
+int main(){
+    auto a = complex_multiple(1, 2, 3, 4);
+    for(auto &i:a){cout<<i<<endl;}
+    return 0;
+}
